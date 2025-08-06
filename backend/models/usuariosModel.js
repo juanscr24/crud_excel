@@ -6,24 +6,14 @@ const Usuarios = {
     },
 
     getById: (id, callback) => {
-        db.query('SELECT * FROM usuarios WHERE id = ?', [id], callback);
+        db.query('SELECT * FROM usuarios WHERE id_usuario = ?', [id], callback);
     },
 
-    create: ({ nombre, correo, contraseña }, callback) => {
-        db.query(
-            'INSERT INTO usuarios (nombre, correo, contraseña) VALUES (?, ?, ?)',
-            [nombre, correo, contraseña],
-            callback
-        );
+    create: (usuario, callback) => {
+        const {nombre, segundo_nombre, apellido, segundo_apellido, no_identidad, correo, telefono} = usuario
+        const sql = 'INSERT INTO usuarios (nombre, segundo_nombre, apellido, segundo_apellido, no_identidad, correo, telefono) VALUES (?, ?, ?, ?, ?, ?, ?)';
+        db.query( sql, [nombre, segundo_nombre, apellido, segundo_apellido, no_identidad, correo, telefono],callback);
     },
-
-    login: ({ correo, contraseña }, callback) => {
-        db.query(
-            'SELECT * FROM usuarios WHERE correo = ? AND contraseña = ?',
-            [correo, contraseña],
-            callback
-        );
-    }
 };
 
 module.exports = Usuarios;

@@ -1,7 +1,7 @@
 const Libro = require('../models/librosModel');
 
 exports.getLibros = (req, res) => {
-    Libro.getAllLibros((err, results) => {
+    Libro.getAll((err, results) => {
         if (err) {
             res.status(500).json({ error: 'Error al obtener libros' });
         } else {
@@ -11,7 +11,7 @@ exports.getLibros = (req, res) => {
 };
 
 exports.createLibro = (req, res) => {
-    Libro.createLibro(req.body, (err, result) => {
+    Libro.create(req.body, (err, result) => {
         if (err) {
             console.error(err); // Usamos 'err', no 'error'
             res.status(500).json({ error: err.message });

@@ -7,8 +7,10 @@ const Autores = {
     getById: (id, callback) => {
         db.query('SELECT * FROM autores WHERE id_autor = ?', [id], callback);
     },
-    create: (data, callback) => {
-        db.query('INSERT INTO autores (nombre_autor) VALUES (?)', [data.nombre_autor], callback);
+    create: (autor, callback) => {
+        const {nombre_autor, segundo_nombre_autor, apellido_autor, segundo_apellido_autor} = autor;
+        const sql = 'INSERT INTO autores (nombre_autor, segundo_nombre_autor, apellido_autor, segundo_apellido_autor) VALUES (?, ?, ?, ?)'
+        db.query(sql, [nombre_autor, segundo_nombre_autor, apellido_autor, segundo_apellido_autor], callback);
     }
 };
 
